@@ -28,7 +28,7 @@ meta:
 
 jobs:
 - name: shipit
-  plans:
+  plan:
   - (( inline ))
   - do:
     - (( merge ))
