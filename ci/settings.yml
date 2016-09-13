@@ -24,7 +24,7 @@ meta:
 
   slack:
     webhook: (( vault "secret/pipelines/canary-boshrelease/slack:webhook" ))
-    channel: '#botspam'
+    channel: '#concourse'
 
 jobs:
 - name: shipit
