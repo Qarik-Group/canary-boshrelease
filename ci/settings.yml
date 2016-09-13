@@ -43,4 +43,4 @@ jobs:
         channel:  (( grab meta.slack.channel ))
         username: (( grab meta.slack.username ))
         icon_url: (( grab meta.slack.icon ))
-        text:     (( concat meta.slack.success_moji " " meta.name " has succeeded through all steps!" ))
+        text:     (( concat meta.slack.success_moji " " meta.pipeline " has succeeded through all steps!" ))
