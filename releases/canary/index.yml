@@ -38,4 +38,6 @@ builds:
     version: 1.0.17
   bbe1bde7-7230-45ed-bca9-5911e0a4bcc5:
     version: 1.0.18
+  f6b59c10-a934-48ad-ac11-463d3154aab4:
+    version: 1.0.19
 format-version: '2'
