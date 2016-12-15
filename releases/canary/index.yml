@@ -50,4 +50,6 @@ builds:
     version: 1.0.23
   ad678a90-919b-46d7-8148-1542856ab26a:
     version: 1.0.24
+  38a12158-ab83-4e0e-881d-156adbe6b959:
+    version: 1.0.25
 format-version: '2'
