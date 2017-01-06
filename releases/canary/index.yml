@@ -54,4 +54,6 @@ builds:
     version: 1.0.25
   599e38fb-a124-480d-a0be-9d021b4dc83b:
     version: 1.0.26
+  509ad6ba-6e44-47be-bfda-d8e07d5e2738:
+    version: 1.0.27
 format-version: '2'
