@@ -58,4 +58,6 @@ builds:
     version: 1.0.27
   8cae022f-ff4f-4df6-92f4-91190e9e5c32:
     version: 1.0.28
+  ab3012c0-0784-427b-8e31-5e481e105aa9:
+    version: 1.0.29
 format-version: '2'
