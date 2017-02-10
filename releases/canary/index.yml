@@ -60,4 +60,6 @@ builds:
     version: 1.0.28
   ab3012c0-0784-427b-8e31-5e481e105aa9:
     version: 1.0.29
+  90fb0f5e-1a72-4666-91d5-09bdc2ac3ebe:
+    version: 1.0.30
 format-version: '2'
