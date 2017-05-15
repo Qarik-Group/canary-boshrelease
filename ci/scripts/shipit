@@ -1,10 +1,9 @@
 #!/bin/bash
-
 #
 # ci/scripts/shipit
 #
 # Script for generating Github release / tag assets
-# and managing release notes for a software pipeline
+# and managing release notes for a BOSH Release pipeline
 #
 # author:  James Hunt <james@niftylogic.com>
 # created: 2016-03-30
@@ -32,39 +31,32 @@ fi
 
 ###############################################################
 
-#?#ORIGIN=$(pwd)
-TARGETS=${TARGETS:-linux/amd64 darwin/amd64}
-ROOT=$( cd "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )
+cat > ~/.bosh_config << EOF
+---
+aliases:
+  target:
+    bosh-lite: ${BOSH_LITE_TARGET}
+auth:
+  ${BOSH_LITE_TARGET}:
+    username: ${BOSH_LITE_USERNAME}
+    password: ${BOSH_LITE_PASSWORD}
+EOF
+cat > ${REPO_ROOT}/config/private.yml << EOF
+---
+blobstore:
+  s3:
+    access_key_id: ${AWS_ACCESS_KEY}
+    secret_access_key: ${AWS_SECRET_KEY}
+EOF
+bosh target ${BOSH_LITE_TARGET}
+(cd ${REPO_ROOT}
+ bosh -n create release --final --with-tarball --version "${VERSION}")
 
-pushd $REPO_ROOT
-newgopath=${ROOT%%/gopath/*}/gopath
-if [[ -d ${newgopath} ]]; then
-	if [[ -z ${GOPATH} ]]; then
-		GOPATH="${newgopath}"
-	else
-		GOPATH="${newgopath}:${GOPATH}"
-	fi
-	PATH="${PATH}:${newgopath}/bin"
-fi
-echo ">> Using GOPATH ${GOPATH}"
-go get github.com/mitchellh/gox
-popd
-
-if [[ -n ${STATIC_BINARY} && ${STATIC_BINARY} != "false" ]]; then
-	export CGO_ENABLED=0
-fi
-
-pushd $REPO_ROOT
-mkdir artifacts
-gox -osarch="${TARGETS}" --output="artifacts/${BINARY}-{{.OS}}-{{.Arch}}" -ldflags="-X main.Version=${VERSION}" ./...
-go build -o "${BINARY}" -ldflags="-X main.Version=${VERSION}" ${CMD_PKG:-.}
-./${BINARY} -v
-popd
-
+mkdir -p ${RELEASE_ROOT}/artifacts
 echo "v${VERSION}"                         > ${RELEASE_ROOT}/tag
 echo "${RELEASE_NAME} v${VERSION}"         > ${RELEASE_ROOT}/name
 mv ${REPO_ROOT}/ci/release_notes.md          ${RELEASE_ROOT}/notes.md
-mv ${REPO_ROOT}/artifacts                    ${RELEASE_ROOT}/artifacts
+cp ${REPO_ROOT}/releases/*/*-${VERSION}.tgz  ${RELEASE_ROOT}/artifacts
 
 cat > ${RELEASE_ROOT}/notification <<EOF
 <!here> New ${RELEASE_NAME} v${VERSION} released!
@@ -86,4 +78,4 @@ fi
  git commit -m "release v${VERSION}")
 
 # so that future steps in the pipeline can push our changes
-cp -a ${REPO_ROOT} ${REPO_OUT}/git
+cp -a ${REPO_ROOT} ${REPO_OUT}
