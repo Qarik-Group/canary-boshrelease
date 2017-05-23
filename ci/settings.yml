@@ -25,6 +25,7 @@ meta:
   slack:
     webhook: (( vault "secret/pipelines/canary-boshrelease/slack:webhook" ))
     channel: '#concourse'
+    success_url: '(( concat meta.url "/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME" ))'
 
 jobs:
 - name: shipit
@@ -43,4 +44,4 @@ jobs:
         channel:  (( grab meta.slack.channel ))
         username: (( grab meta.slack.username ))
         icon_url: (( grab meta.slack.icon ))
-        text:     (( concat meta.slack.success_moji " " meta.pipeline " has succeeded through all steps!" ))
+        text:     (( concat meta.slack.success_moji " " meta.pipeline " has succeeded through all steps! (<" meta.slack.success_url "| shipit build $BUILD_NAME>)" ))
