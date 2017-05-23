@@ -96,4 +96,6 @@ builds:
     version: 1.0.46
   f3a45de4-d6f7-4944-bce4-82c1379a9ca8:
     version: 1.0.47
+  6ad0ede0-61e7-46c6-80b0-24432afca652:
+    version: 1.0.48
 format-version: '2'
