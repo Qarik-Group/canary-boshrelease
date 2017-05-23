@@ -1,0 +1,15 @@
+---
+packages: []
+jobs:
+- name: just_install_packages
+  version: dbbec7903e56eada46d341e6b8f8909969582cce
+  fingerprint: dbbec7903e56eada46d341e6b8f8909969582cce
+  sha1: c8b31636cdc1c78ad2eaee33bb1afbff903ba20d
+license:
+  version: a11dc44d2ff75b964daf257650268340e4c5ba39
+  fingerprint: a11dc44d2ff75b964daf257650268340e4c5ba39
+  sha1: 07adf1309bd4ca3a96f738007344871b2f94f23c
+commit_hash: 6f546717
+uncommitted_changes: false
+name: canary
+version: 1.0.49
