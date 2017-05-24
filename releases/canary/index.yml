@@ -104,4 +104,6 @@ builds:
     version: 1.0.50
   b43ab929-2361-43e8-bead-394b6b42bee4:
     version: 1.0.51
+  f123a5ae-6760-47d4-afe8-a5aa82622a93:
+    version: 1.0.52
 format-version: '2'
