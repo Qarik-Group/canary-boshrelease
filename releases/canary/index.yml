@@ -108,4 +108,6 @@ builds:
     version: 1.0.52
   771bf8b9-a031-46e5-ba26-7883badefd88:
     version: 1.0.53
+  91c83db3-7fc7-4db4-801e-e81cbecc144d:
+    version: 1.0.54
 format-version: '2'
