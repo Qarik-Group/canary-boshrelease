@@ -21,6 +21,37 @@ need_command() {
 	fi
 }
 
+NO_FLY=
+SAVE_MANIFEST=
+NON_INTERACTIVE=
+
+cleanup() {
+    rm -f save-manifest.yml
+    if [[ -n ${SAVE_MANIFEST} && -e .deploy.yml ]]; then
+        mv .deploy.yml save-manifest.yml
+    fi
+    rm -f .deploy.yml
+}
+
+usage() {
+    echo Command line arguments:
+    echo "no-fly           Do not execute the fly commands"
+    echo "save-manifest    Save manifest to file save-manifest"
+    echo "non-interactive  enable non-interactive mode for pipelines"
+}
+
+for arg do
+    case "${arg}" in
+        no-fly|no_fly)  NO_FLY="yes" ;;
+        save-manifest|save_manifest) SAVE_MANIFEST="yes" ;;
+        non-interactive|non_interactive) NON_INTERACTIVE="--non-interactive"
+        help|-h|--help) usage; exit 0 ;;
+        *) echo Invalid argument
+            usage
+            exit 1
+    esac
+done
+
 cd $(dirname $BASH_SOURCE[0])
 echo "Working in $(pwd)"
 need_command spruce
@@ -65,5 +96,6 @@ fi
 fly_cmd="${FLY_CMD:-fly}"
 
 set +x
-$fly_cmd --target ${TARGET} set-pipeline     --pipeline ${PIPELINE} --config .deploy.yml
+[[ -n ${NO_FLY} ]] && { echo no fly execution requested ; exit 0; }
+$fly_cmd --target ${TARGET} set-pipeline     --pipeline ${PIPELINE} --config .deploy.yml ${NON_INTERACTIVE}
 $fly_cmd --target ${TARGET} unpause-pipeline --pipeline ${PIPELINE}
