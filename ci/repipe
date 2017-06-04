@@ -44,7 +44,7 @@ for arg do
     case "${arg}" in
         no-fly|no_fly)  NO_FLY="yes" ;;
         save-manifest|save_manifest) SAVE_MANIFEST="yes" ;;
-        non-interactive|non_interactive) NON_INTERACTIVE="--non-interactive"
+        non-interactive|non_interactive) NON_INTERACTIVE="--non-interactive" ;;
         help|-h|--help) usage; exit 0 ;;
         *) echo Invalid argument
             usage
