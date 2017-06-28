@@ -120,4 +120,6 @@ builds:
     version: 1.0.58
   e44b9081-8899-43e2-b63c-00855c9458f0:
     version: 1.0.59
+  b6b965a0-dc11-4d28-848c-b8de3d3cbece:
+    version: 1.0.60
 format-version: '2'
