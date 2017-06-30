@@ -122,4 +122,6 @@ builds:
     version: 1.0.59
   b6b965a0-dc11-4d28-848c-b8de3d3cbece:
     version: 1.0.60
+  e452f00d-20ce-477e-bb53-cf2a7ab6655c:
+    version: 1.0.61
 format-version: '2'
