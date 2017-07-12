@@ -24,7 +24,7 @@ meta:
 
   slack:
     webhook: (( vault "secret/pipelines/canary-boshrelease/slack:webhook" ))
-    channel: '#concourse'
+    channel: '#snw-infrastructure'
     success_url: '(( concat meta.url "/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME" ))'
 
 jobs:
