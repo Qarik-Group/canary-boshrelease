@@ -138,4 +138,6 @@ builds:
     version: 1.0.67
   dbd6988e-076e-4e26-82a1-923abb78a66b:
     version: 1.0.68
+  8c23c37c-47d6-461c-8043-0761dd68dd93:
+    version: 1.0.69
 format-version: '2'
