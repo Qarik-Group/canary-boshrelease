@@ -29,6 +29,6 @@ update:
 
 releases:
 - name: canary
-  version: latest # TODO: update after first final release
-  # url:            TODO: update after first final release
-  # sha1:           TODO: update after first final release
+  version: 1.1.0
+  url: https://github.com/starkandwayne/canary-boshrelease/releases/download/v1.1.0/canary-1.1.0.tgz
+  sha1: 12a86cee61f08bda9b1879501a9adf2c1c69617a
