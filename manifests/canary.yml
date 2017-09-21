@@ -29,6 +29,6 @@ update:
 
 releases:
 - name: canary
-  version: 1.1.1
-  url: https://github.com/starkandwayne/canary-boshrelease/releases/download/v1.1.1/canary-1.1.1.tgz
-  sha1: fdbb812de04708c170b7d255d03fb196fe425675
+  version: 1.1.2
+  url: https://github.com/starkandwayne/canary-boshrelease/releases/download/v1.1.2/canary-1.1.2.tgz
+  sha1: 5384d98468967eb857350ad5d75c025502e95040
