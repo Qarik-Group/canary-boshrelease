@@ -1,0 +1,13 @@
+name: canary
+version: 1.1.5
+commit_hash: d9ecf7c
+uncommitted_changes: false
+jobs:
+- name: canary
+  version: eed3a7fdd80a7139a6f136d4b56ffb7006b28547
+  fingerprint: eed3a7fdd80a7139a6f136d4b56ffb7006b28547
+  sha1: e49aa790a703fe0d2544a0008b76288e50ebf19e
+license:
+  version: ac77a509d8b020148f8ce7b3ecce592f89c29c87
+  fingerprint: ac77a509d8b020148f8ce7b3ecce592f89c29c87
+  sha1: f954222fc18f004c0ae738de785df3976c4c4437
