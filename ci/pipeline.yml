@@ -70,8 +70,11 @@ groups:
       - testflight-pr
       - rc
       - shipit
+  - name: versioning
+    jobs:
       - major
       - minor
+      - patch
 
 jobs:
   - name: testflight
@@ -205,11 +208,41 @@ jobs:
 
   - name: rc
     public: true
+    serial: true
     plan:
     - do:
       - aggregate:
           - { get: git,     trigger: true,  passed: [testflight] }
           - { get: version, trigger: true, params: {pre: rc} }
+      - task: release-notes
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: (( grab meta.image.name ))
+              tag:        (( grab meta.image.tag ))
+          inputs:
+              - { name: git }
+          run:
+            path: sh
+            args:
+            - -ce
+            - |
+              cd git
+              if [ -f ci/release_notes.md ]; then
+                echo "######   RELEASE NOTES   ###############"
+                echo
+                cat ci/release_notes.md
+                echo
+                echo "########################################"
+                echo
+              else
+                echo "NO RELEASE NOTES HAVE BEEN WRITTEN"
+                echo "You *might* want to do that before"
+                echo "hitting (+) on that shipit job..."
+                echo
+              fi
       - put: version
         params: {file: version/number}
       on_failure:
@@ -233,6 +266,20 @@ jobs:
           username: (( grab meta.slack.username ))
           icon_url: (( grab meta.slack.icon ))
           text:    '(( concat meta.slack.fail_url " " meta.pipeline ": minor job failed" ))'
+
+  - name: patch
+    public: true
+    plan:
+    - do:
+      - { get: version, trigger: false, params: {bump: patch} }
+      - { put: version,                 params: {file: version/number} }
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:    '(( concat meta.slack.fail_url " " meta.pipeline ": patch job failed" ))'
 
   - name: major
     public: true
@@ -346,6 +393,7 @@ resources:
 
   - name: git-pull-requests
     type: pull-request
+    check_every: 15m # Required due to API throttling.
     source:
       access_token: (( grab meta.github.access_token ))
       private_key:  (( grab meta.github.private_key ))
